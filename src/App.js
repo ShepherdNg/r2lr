@@ -3,13 +3,10 @@ import './App.css';
 
 class App extends Component {
   render() {
-    const helloWorld={
-      text:'Welcome to the Road to learn React'
-    }
-    helloWorld.text='Bye Bye React';
+    const helloWorld='Welcome to the Road to learn React';
     return (
       <div className="App">
-        <h2>{helloWorld.text}</h2>
+        <h2>{helloWorld}</h2>
       </div>
     );
   }
