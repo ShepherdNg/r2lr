@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   render() {
-    var helloword='Welcome to the Road to learn React';
+    const helloWorld={
+      text:'Welcome to the Road to learn React'
+    }
+    helloWorld.text='Bye Bye React';
     return (
       <div className="App">
-        <h2>{helloword}</h2>
+        <h2>{helloWorld.text}</h2>
       </div>
     );
   }
