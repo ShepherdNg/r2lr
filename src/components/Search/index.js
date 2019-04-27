@@ -6,7 +6,7 @@ export const Search = ({value, onChange, onSubmit, children}) =>
       value={value}
       onChange={onChange}
     />
-		<button type="submit">
-			{children}
-		</button>
+    <button type="submit">
+        {children}
+    </button>
   </form>
