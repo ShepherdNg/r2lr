@@ -8,7 +8,7 @@ import {
   PATH_SEARCH, 
   PARAM_SEARCH, 
   PARAM_PAGE, 
-  PARAM_HPP
+  PARAM_HPP,
 } from '../../constants';
 import {Button} from '../Button';
 import {Loading} from '../Loading';
@@ -25,6 +25,8 @@ class App extends Component {
       searchTerm: DEFAULT_QUERY,
       error: null,
       isLoading: false,
+      sortKey: 'NONE',
+      isSortReverse: false,
     };
   }
   
@@ -95,13 +97,20 @@ class App extends Component {
     });
   }
 
+  onSort = (sortKey)=>{
+    const isSortReverse=this.state.sortKey === sortKey && !this.state.isSortReverse;
+    this.setState({sortKey, isSortReverse});
+  }
+
   render() {
     const {
       searchTerm,
       results,
       searchKey,
       error,
-      isLoading
+      isLoading,
+      sortKey,
+      isSortReverse
     } = this.state;
 
     const page = (
@@ -131,6 +140,9 @@ class App extends Component {
           ? <p>Something went wrong.</p>
           : <Table
             list={list}
+            sortKey={sortKey}
+            isSortReverse={isSortReverse}
+            onSort={this.onSort}
             onDismiss={this.onDismiss}
           />
         }
