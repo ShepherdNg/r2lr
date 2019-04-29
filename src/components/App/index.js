@@ -25,8 +25,6 @@ class App extends Component {
       searchTerm: DEFAULT_QUERY,
       error: null,
       isLoading: false,
-      sortKey: 'NONE',
-      isSortReverse: false,
     };
   }
   
@@ -97,11 +95,6 @@ class App extends Component {
     });
   }
 
-  onSort = (sortKey)=>{
-    const isSortReverse=this.state.sortKey === sortKey && !this.state.isSortReverse;
-    this.setState({sortKey, isSortReverse});
-  }
-
   render() {
     const {
       searchTerm,
@@ -109,8 +102,6 @@ class App extends Component {
       searchKey,
       error,
       isLoading,
-      sortKey,
-      isSortReverse
     } = this.state;
 
     const page = (
@@ -140,9 +131,6 @@ class App extends Component {
           ? <p>Something went wrong.</p>
           : <Table
             list={list}
-            sortKey={sortKey}
-            isSortReverse={isSortReverse}
-            onSort={this.onSort}
             onDismiss={this.onDismiss}
           />
         }
