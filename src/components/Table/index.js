@@ -124,6 +124,5 @@ Table.propTypes = {
     })
   ).isRequired, 
   sortKey: PropTypes.string,
-  onSort: PropTypes.func.isRequired,
   onDismiss: PropTypes.func.isRequired,
 }

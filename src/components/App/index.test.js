@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import App from '../App';
+import App, {updateSearchTopStoriesState} from '../App';
 import {Button} from '../Button';
 import {Search} from '../Search';
 import {Table} from '../Table';
@@ -94,3 +94,43 @@ describe('Table', ()=>{
   });
 
 });
+
+describe('updateSearchTopStoriesState', ()=>{
+  const hits=[
+    {title:'1', author:'1', num_comments:1, points:2, objectID:'y'},
+    {title:'2', author:'2', num_comments:1, points:2, objectID:'z'},
+  ];
+  const page=1;
+  const prevState={
+    error:null,
+    isLoading:false,
+    results:{
+      "redux":{
+        hits:[
+          {title:'3', author:'3', num_comments:3, points:2, objectID:'x'},
+          {title:'4', author:'4', num_comments:1, points:4, objectID:'w'},
+        ],
+        page:0,
+      }
+    },
+    searchKey:"redux",
+    searchTerm:"redux",
+  };
+  const expectedStateChange={
+    results: {
+      "redux":{
+        hits:[
+          {title:'3', author:'3', num_comments:3, points:2, objectID:'x'},
+          {title:'4', author:'4', num_comments:1, points:4, objectID:'w'},
+          {title:'1', author:'1', num_comments:1, points:2, objectID:'y'},
+          {title:'2', author:'2', num_comments:1, points:2, objectID:'z'},
+        ],
+        page:1,
+      },
+    },
+    isLoading:false
+  };
+  it('renders without crashing', ()=>{
+    expect(updateSearchTopStoriesState(hits, page)(prevState)).toEqual(expectedStateChange);
+  })
+})
